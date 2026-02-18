@@ -87,7 +87,10 @@ interface PendingFile extends SysAttachment {
 const props = defineProps<{
   targetType: string
   targetId: string
+  type?: number  // 可选参数，默认为1
 }>()
+
+const attachmentType = computed(() => props.type ?? 1)
 
 const fileInput = ref<HTMLInputElement>()
 const fileList = ref<SysAttachment[]>([])  // 已上传的文件
@@ -142,7 +145,7 @@ const handleFileChange = async (e: Event) => {
   // 如果有 targetId，直接上传
   if (props.targetId) {
     try {
-      const res = await uploadAttachment(file, props.targetType, props.targetId)
+      const res = await uploadAttachment(file, props.targetType, props.targetId, attachmentType.value)
       fileList.value.push(res.data)
       ElMessage.success('上传成功')
     } catch (error) {
@@ -240,7 +243,7 @@ const loadAttachments = async () => {
   }
 
   try {
-    const res = await getAttachmentList(props.targetType, props.targetId)
+    const res = await getAttachmentList(props.targetType, props.targetId, attachmentType.value)
     fileList.value = res.data || []
   } catch (error) {
     fileList.value = []
@@ -259,7 +262,7 @@ const uploadPendingFiles = async (targetId: string): Promise<boolean> => {
     if (!pendingFile.rawFile) continue
 
     try {
-      const res = await uploadAttachment(pendingFile.rawFile, props.targetType, targetId)
+      const res = await uploadAttachment(pendingFile.rawFile, props.targetType, targetId, attachmentType.value)
       fileList.value.push(res.data)
     } catch (error) {
       allSuccess = false
