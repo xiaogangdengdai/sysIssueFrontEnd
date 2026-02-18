@@ -5,7 +5,7 @@ export function getIssueLogPage(params: IssueLogQuery): Promise<PageResult<Syste
   return request.get('/issue-log/page', { params })
 }
 
-export function getIssueLogById(id: string): Promise<SystemIssueLog> {
+export function getIssueLogById(id: string): Promise<{ data: SystemIssueLog }> {
   return request.get(`/issue-log/${id}`)
 }
 

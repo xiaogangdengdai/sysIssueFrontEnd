@@ -89,8 +89,14 @@ export interface IssueLogQuery {
   endTime?: string
 }
 
+// 选项类型
+export interface SelectOption {
+  label: string
+  value: number
+}
+
 // 类型选项
-export const TYPE_OPTIONS = [
+export const TYPE_OPTIONS: SelectOption[] = [
   { label: 'bug修复', value: 1 },
   { label: '新功能开发', value: 2 },
   { label: '原有功能改造', value: 3 },
@@ -98,7 +104,7 @@ export const TYPE_OPTIONS = [
 ]
 
 // 问题状态选项
-export const ISSUE_STATUS_OPTIONS = [
+export const ISSUE_STATUS_OPTIONS: SelectOption[] = [
   { label: '待处理', value: 1 },
   { label: '处理中', value: 2 },
   { label: '已完成', value: 3 },

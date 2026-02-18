@@ -79,7 +79,23 @@ import {
 import type { SysAttachment } from '@/types/attachment'
 
 // 扩展类型，包含本地文件信息
-interface PendingFile extends SysAttachment {
+interface PendingFile {
+  id?: number
+  type?: number
+  targetType?: string
+  targetId?: string
+  fileName: string
+  filePath?: string
+  fileSize?: number
+  fileType?: string
+  fileExt?: string
+  md5?: string
+  sortOrder?: number
+  remark?: string
+  creator?: string
+  createTime?: string
+  updateTime?: string
+  deleted?: number
   localUrl?: string  // 本地预览URL
   rawFile?: File     // 原始文件对象
 }
@@ -169,7 +185,7 @@ const handleFileChange = async (e: Event) => {
 }
 
 // 预览
-const handlePreview = async (file: PendingFile, index: number) => {
+const handlePreview = async (file: PendingFile, _index: number) => {
   // 待上传的图片使用本地URL
   if (!file.id && file.localUrl) {
     previewImageUrl.value = file.localUrl
@@ -218,8 +234,9 @@ const handleDelete = async (index: number) => {
   if (index < uploadedCount) {
     // 删除已上传的文件
     const file = fileList.value[index]
+    if (!file || !file.id) return
     try {
-      await deleteAttachment(file.id!)
+      await deleteAttachment(file.id)
       fileList.value.splice(index, 1)
       ElMessage.success('删除成功')
     } catch (error) {
