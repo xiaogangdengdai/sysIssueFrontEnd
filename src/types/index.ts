@@ -62,27 +62,45 @@ export const STATUS_OPTIONS = [
 // 系统问题日志类型
 export interface SystemIssueLog {
   id?: string
-  description: string
+  type: number
+  createTableSql?: string
+  newRequirement?: string
+  beforeTransformation?: string
+  transformation?: string
+  businessContext: string
   remark?: string
-  status?: number
+  status: number
   creator?: string
+  creatorIp?: string
   createdAt?: string
+  modifyUser?: string
+  modifyIp?: string
+  modifyAt?: string
 }
 
 // 问题日志查询条件
 export interface IssueLogQuery {
   pageNum: number
   pageSize: number
-  description?: string
+  type?: number
   creator?: string
   status?: number
   startTime?: string
   endTime?: string
 }
 
+// 类型选项
+export const TYPE_OPTIONS = [
+  { label: 'bug修复', value: 1 },
+  { label: '新功能开发', value: 2 },
+  { label: '原有功能改造', value: 3 },
+  { label: '页面原型快速实现', value: 4 }
+]
+
 // 问题状态选项
 export const ISSUE_STATUS_OPTIONS = [
   { label: '待处理', value: 1 },
   { label: '处理中', value: 2 },
-  { label: '已解决', value: 3 }
+  { label: '已完成', value: 3 },
+  { label: '处理失败', value: 4 }
 ]

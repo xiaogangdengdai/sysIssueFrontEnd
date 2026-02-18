@@ -1,5 +1,6 @@
 export interface SysAttachment {
   id?: number
+  type?: number
   targetType?: string
   targetId?: string
   fileName: string
@@ -7,9 +8,12 @@ export interface SysAttachment {
   fileSize?: number
   fileType?: string
   fileExt?: string
+  md5?: string
   sortOrder?: number
+  remark?: string
   creator?: string
   createTime?: string
+  updateTime?: string
   deleted?: number
 }
 
