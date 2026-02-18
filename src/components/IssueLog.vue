@@ -321,6 +321,22 @@ const getFieldConfig = (type: number) => {
       config.createTableSqlRequired = true
       config.newRequirementRequired = true
       break
+    case 5: // 后台方法深度分析
+      config.createTableSql = true
+      config.beforeTransformation = true
+      config.transformation = true
+      config.createTableSqlRequired = false
+      config.beforeTransformationRequired = false
+      config.transformationRequired = false
+      break
+    case 6: // 前端功能模块深度分析
+      config.newRequirement = true
+      config.beforeTransformation = true
+      config.transformation = true
+      config.newRequirementRequired = false
+      config.beforeTransformationRequired = false
+      config.transformationRequired = false
+      break
   }
 
   return config
@@ -407,7 +423,9 @@ const getTypeTagType = (type: number) => {
     1: 'danger',
     2: 'success',
     3: 'warning',
-    4: 'primary'
+    4: 'primary',
+    5: 'info',
+    6: ''
   }
   return typeMap[type] || 'info'
 }

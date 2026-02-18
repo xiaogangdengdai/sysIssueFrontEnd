@@ -100,7 +100,9 @@ export const TYPE_OPTIONS: SelectOption[] = [
   { label: 'bug修复', value: 1 },
   { label: '新功能开发', value: 2 },
   { label: '原有功能改造', value: 3 },
-  { label: '页面原型快速实现', value: 4 }
+  { label: '页面原型快速实现', value: 4 },
+  { label: '后台方法深度分析', value: 5 },
+  { label: '前端功能模块深度分析', value: 6 }
 ]
 
 // 问题状态选项
