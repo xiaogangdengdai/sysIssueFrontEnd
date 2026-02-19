@@ -3,7 +3,12 @@
     <el-card>
       <template #header>
         <div class="card-header">
-          <span>🐛 系统问题日志</span>
+          <el-button type="primary" link @click="goBack">
+            <el-icon><ArrowLeft /></el-icon>
+            返回首页
+          </el-button>
+          <span class="title">🐛 系统问题日志</span>
+          <div class="placeholder"></div>
         </div>
       </template>
 
@@ -235,12 +240,24 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted, nextTick } from 'vue'
+import { useRouter } from 'vue-router'
+import { ArrowLeft } from '@element-plus/icons-vue'
 import AttachmentUpload from './AttachmentUpload.vue'
 import AttachmentView from './AttachmentView.vue'
 import { ElMessage, ElMessageBox, type FormInstance, type FormRules } from 'element-plus'
 import { getIssueLogPage, getIssueLogById, addIssueLog, updateIssueLog, deleteIssueLog, batchDeleteIssueLog } from '@/api/issueLog'
-import type { SystemIssueLog, IssueLogQuery } from '@/types'
-import { TYPE_OPTIONS, ISSUE_STATUS_OPTIONS } from '@/types'
+import type { SystemIssueLog, IssueLogQuery, SelectOption } from '@/types'
+import { ISSUE_STATUS_OPTIONS } from '@/types'
+
+// 开发助手只使用 type=1,2,3
+const TYPE_OPTIONS: SelectOption[] = [
+  { label: 'bug修复', value: 1 },
+  { label: '新功能开发', value: 2 },
+  { label: '原有功能改造', value: 3 }
+]
+
+const router = useRouter()
+const goBack = () => router.push('/')
 
 const loading = ref(false)
 const tableData = ref<SystemIssueLog[]>([])
@@ -250,7 +267,7 @@ const selectedIds = ref<string[]>([])
 const queryParams = reactive<IssueLogQuery>({
   pageNum: 1,
   pageSize: 10,
-  type: undefined,
+  types: [1, 2, 3],  // 开发助手只查询type=1,2,3的数据
   creator: '',
   status: undefined
 })
@@ -462,7 +479,7 @@ const handleSearch = () => {
 }
 
 const handleReset = () => {
-  Object.assign(queryParams, { pageNum: 1, pageSize: 10, type: undefined, creator: '', status: undefined })
+  Object.assign(queryParams, { pageNum: 1, pageSize: 10, types: [1, 2, 3], creator: '', status: undefined })
   fetchData()
 }
 
@@ -535,11 +552,19 @@ onMounted(() => {
 
 <style scoped>
 .issue-log-container {
-  padding: 0;
+  padding: 20px;
 }
 .card-header {
-  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.title {
+  font-size: 18px;
   font-weight: bold;
+}
+.placeholder {
+  width: 80px;
 }
 .search-form {
   margin-bottom: 16px;

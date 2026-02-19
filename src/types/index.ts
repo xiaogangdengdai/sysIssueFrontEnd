@@ -63,11 +63,12 @@ export const STATUS_OPTIONS = [
 export interface SystemIssueLog {
   id?: string
   type: number
+  description?: string
   createTableSql?: string
   newRequirement?: string
   beforeTransformation?: string
   transformation?: string
-  businessContext: string
+  businessContext?: string
   remark?: string
   status: number
   creator?: string
@@ -83,6 +84,7 @@ export interface IssueLogQuery {
   pageNum: number
   pageSize: number
   type?: number
+  types?: number[]  // 支持多类型查询
   creator?: string
   status?: number
   startTime?: string
@@ -102,7 +104,8 @@ export const TYPE_OPTIONS: SelectOption[] = [
   { label: '原有功能改造', value: 3 },
   { label: '页面原型快速实现', value: 4 },
   { label: '后台方法深度分析', value: 5 },
-  { label: '前端功能模块深度分析', value: 6 }
+  { label: '前端功能模块深度分析', value: 6 },
+  { label: '代码Review报告', value: 7 }
 ]
 
 // 问题状态选项
