@@ -70,7 +70,7 @@
     </el-card>
 
     <!-- 新增/编辑对话框 -->
-    <el-dialog v-model="dialogVisible" :title="dialogTitle" width="650px">
+    <el-dialog v-model="dialogVisible" :title="dialogTitle" width="900px">
       <el-form ref="formRef" :model="formData" :rules="formRules" label-width="130px">
         <el-form-item label="Code Review要求" prop="description">
           <el-input v-model="formData.description" type="textarea" :rows="6" placeholder="请输入代码Review要求描述，例如：请检查用户登录模块的安全性和性能" />
@@ -100,7 +100,7 @@
     </el-dialog>
 
     <!-- 查看详情对话框 -->
-    <el-dialog v-model="viewDialogVisible" title="查看详情" width="700px">
+    <el-dialog v-model="viewDialogVisible" title="查看详情" width="900px">
       <el-descriptions :column="1" border>
         <el-descriptions-item label="Code Review要求">
           <pre class="view-pre">{{ viewData.description || '-' }}</pre>
@@ -112,6 +112,9 @@
         </el-descriptions-item>
         <el-descriptions-item label="备注">
           <pre class="view-pre">{{ viewData.remark || '-' }}</pre>
+        </el-descriptions-item>
+        <el-descriptions-item label="AI反馈">
+          <pre class="view-pre">{{ viewData.aiResponse || '-' }}</pre>
         </el-descriptions-item>
         <el-descriptions-item label="创建人">{{ viewData.creator || '-' }}</el-descriptions-item>
         <el-descriptions-item label="创建时间">{{ viewData.createdAt || '-' }}</el-descriptions-item>

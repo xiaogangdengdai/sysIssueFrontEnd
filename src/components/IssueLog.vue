@@ -82,7 +82,7 @@
     </el-card>
 
     <!-- 新增/编辑对话框 -->
-    <el-dialog v-model="dialogVisible" :title="dialogTitle" width="650px">
+    <el-dialog v-model="dialogVisible" :title="dialogTitle" width="900px">
       <el-form ref="formRef" :model="formData" :rules="dynamicFormRules" label-width="110px">
         <!-- 类型选择 -->
         <el-form-item label="类型" prop="type">
@@ -148,7 +148,7 @@
     </el-dialog>
 
     <!-- 查看详情对话框 -->
-    <el-dialog v-model="viewDialogVisible" title="查看详情" width="700px">
+    <el-dialog v-model="viewDialogVisible" title="查看详情" width="900px">
       <el-descriptions :column="1" border>
         <el-descriptions-item label="类型">
           <el-tag :type="getTypeTagType(viewData.type)">
@@ -184,6 +184,10 @@
 
         <el-descriptions-item label="备注">
           <pre class="view-pre">{{ viewData.remark || '-' }}</pre>
+        </el-descriptions-item>
+
+        <el-descriptions-item label="AI反馈">
+          <pre class="view-pre">{{ viewData.aiResponse || '-' }}</pre>
         </el-descriptions-item>
 
         <el-descriptions-item label="创建人">

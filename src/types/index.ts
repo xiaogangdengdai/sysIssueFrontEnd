@@ -70,6 +70,7 @@ export interface SystemIssueLog {
   transformation?: string
   businessContext?: string
   remark?: string
+  aiResponse?: string
   status: number
   creator?: string
   creatorIp?: string
